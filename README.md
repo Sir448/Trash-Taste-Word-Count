@@ -6,6 +6,7 @@ This series of scripts displays the frequency at which words are spoken on the Y
 [CountWords.py](CountWords.py) creates a jsons for the word count of every word said. It does so by scanning the subtitles in the YouTube video.
 When no subtitles are available, it downloads the audio then uses Google's Web Speech API to scan the words said.
 Although it's functional, it doesn't work particularly well.
+This function is in [ScanAudio.py](ScanAudio.py).
 You can change the channels variable to decide which channels to scan. You can choose to scan on of or both of them.
 It writes to different files so running the script again for a different setting won't overwrite the previous file.
 
