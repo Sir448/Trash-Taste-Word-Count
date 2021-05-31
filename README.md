@@ -29,3 +29,23 @@ Each is a different combination of the different channels (Trash Taste, Trash Ta
 
 ### Creating graphs
 [CreateGraph.py](CreateGraph.py) uses all 9 of the jsons to create and save a separate graph for each json using the matplotlib library.
+
+### Graphs
+
+![wordCountByFreq](https://user-images.githubusercontent.com/71520681/120131486-c7184600-c185-11eb-8fba-e0e2a4d83249.png)
+
+![TrashTasteStreamsWordCountByFreq](https://user-images.githubusercontent.com/71520681/120131522-d4cdcb80-c185-11eb-9845-6d147e36604a.png)
+
+![TrashTasteWordCountByFreq](https://user-images.githubusercontent.com/71520681/120131510-cf708100-c185-11eb-95bd-3f496e41d2c5.png)
+
+![wordCountNoStopwords](https://user-images.githubusercontent.com/71520681/120131548-e1eaba80-c185-11eb-8e85-a055d369f5da.png)
+
+![TrashTasteStreamsWordCountNoStopwords](https://user-images.githubusercontent.com/71520681/120131555-e4e5ab00-c185-11eb-9add-70fe35811343.png)
+
+![TrashTasteWordCountNoStopwords](https://user-images.githubusercontent.com/71520681/120131562-e6af6e80-c185-11eb-910a-ab6062734c57.png)
+
+![wordCount](https://user-images.githubusercontent.com/71520681/120131567-e8793200-c185-11eb-9ec1-f05e8ae5b1c4.png)
+
+![TrashTasteStreamsWordCount](https://user-images.githubusercontent.com/71520681/120131576-ee6f1300-c185-11eb-98ec-ade708ec6ea1.png)
+
+![TrashTasteWordCount](https://user-images.githubusercontent.com/71520681/120131571-eb742280-c185-11eb-871f-799ebe2ec9ab.png)
