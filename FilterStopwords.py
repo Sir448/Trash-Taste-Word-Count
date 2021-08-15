@@ -2,7 +2,7 @@ import json
 from nltk.corpus import stopwords
 import gensim
 
-channels = 0
+channels = 2
 
 # Choose filename
 filename = "wordCount"
@@ -25,7 +25,7 @@ filteredWords = []
 for i in orderedWords:
     if i[0] not in stopwords.words() and i[0] not in gensim.parsing.preprocessing.STOPWORDS:
         filteredWords.append(i)
-    if len(filteredWords) >= 50:
+    if len(filteredWords) >= 100:
         break
     
 # Save to json

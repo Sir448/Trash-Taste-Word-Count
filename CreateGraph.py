@@ -18,6 +18,7 @@ files = [
         "TrashTasteStreamsWordCount.json", # 8
 ]
 
+numberOfWords = 50
 
 for fileNumber in range(9):
     # Choosing file
@@ -26,7 +27,7 @@ for fileNumber in range(9):
     filename = files[fileNumber]
 
     # Setting labels
-    suptitle = "Frequency of Words Spoken By The Bois "
+    suptitle = f'Top {numberOfWords} Words Spoken By The Boys '
 
     if fileNumber % 3 == 0:
         suptitle += "(Trash Taste and Streams)"
@@ -50,7 +51,7 @@ for fileNumber in range(9):
 
     # Sort the data by word count
     # I think it's already sorted but this is just to make sure
-    sortedData = sorted(data.items(), key=lambda item: item[1], reverse=True)[:50]
+    sortedData = sorted(data.items(), key=lambda item: item[1], reverse=True)[:numberOfWords]
 
 
     # Creates separated (but still sorted) lists for the words and counts

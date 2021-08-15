@@ -24,7 +24,7 @@ filteredWords = []
 for i in orderedWords:
     if word_frequency(i[0],'en') < 0.000215:
         filteredWords.append(i)
-    if len(filteredWords) >= 50:
+    if len(filteredWords) >= 100:
         break
 
 # Save to json
