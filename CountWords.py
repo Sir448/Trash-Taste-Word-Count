@@ -10,7 +10,7 @@ import googleapiclient.errors
 import pprint
 import json
 
-from ScanAudio import scan_audio
+# from ScanAudio import scan_audio
 
 pp = pprint.PrettyPrinter()
 
@@ -40,17 +40,21 @@ wordCount = {}
 
 nextPageToken = None
 
-channels = 0
+channels = 2
 # 0 for only Trash Taste
 # 1 for both
 # 2 for only Trash Taste After Dark
 
+season = os.getenv("SEASON")
+
 for channelId in channelIds[max(0,channels-1):channels+1]:
-    while True: # While loop to loop through all pages
+    # while True: # While loop to loop through all pages
+    for o in range(2): # Only get the season 2 videos
         # Get search result
         request = youtube.search().list(
                     part="id,snippet",
-                    maxResults=50,
+                    maxResults=50 if o == 0 else 2, # Only get the season 2 videos
+                    # maxResults=50,
                     type="video",
                     channelId=channelId,
                     order="date",
@@ -75,7 +79,7 @@ for channelId in channelIds[max(0,channels-1):channels+1]:
                 print("Subtitles disabled, skipping video")
                 continue # For testing purposes, scanning the audio in the video takes too long, I might remove this but I think I'd rather wait for them to add subtitles to the most recent video
                 # Scans the audio when there are no subtitles on the video
-                script = scan_audio(i['id']['videoId'])
+                # script = scan_audio(i['id']['videoId'])
 
             # Remove punctuation
             script = script.replace(".","").replace(",","").replace("?","").replace("!","").replace("-","").replace(";","")
@@ -127,7 +131,7 @@ if channels == 2:
     outfile = "TrashTasteStreamsW" + outfile[1:]
 
 # Write to json
-with open("./Jsons/"+outfile,"w") as f:
+with open(f"./Jsons/Season {season}/{outfile}","w") as f:
     json.dump(wordCount,f)
 
 

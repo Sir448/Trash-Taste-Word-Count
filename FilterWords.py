@@ -1,13 +1,16 @@
 
 import json
 from wordfreq import word_frequency
+from nltk.corpus import stopwords
+import gensim
+from myStopwords import myStopwords
 import os
 from dotenv import load_dotenv
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-channels = 0
+channels = 2
 season = os.getenv("SEASON")
 
 # Choose filename
@@ -29,12 +32,12 @@ orderedWords = sorted(data.items(), key=lambda item: item[1], reverse=True)
 # This time I chose 0.000303 because the word "shit" has a frequency of 0.000302
 filteredWords = []
 for i in orderedWords:
-    if word_frequency(i[0],'en') < 0.000303:
+    if word_frequency(i[0],'en') < 0.000303 and i[0] not in stopwords.words() and i[0] not in gensim.parsing.preprocessing.STOPWORDS and i[0] not in myStopwords:
         filteredWords.append(i)
     if len(filteredWords) >= 100:
         break
 
 # Save to json
 filteredWordCount = {key: value for (key, value) in filteredWords}
-with open(f'./Jsons/Season {season}/{filename}ByFreq.json','w') as f:
+with open(f'./Jsons/Season {season}/{filename}Filtered.json','w') as f:
     json.dump(filteredWordCount,f)

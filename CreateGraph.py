@@ -2,6 +2,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import json
+import os
+from dotenv import load_dotenv
+
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 # List of files
 # Note: If you're trying to follow the code, you'll notice that this is the first reference to some of these files
@@ -16,11 +21,18 @@ files = [
         "wordCount.json", # 6
         "TrashTasteWordCount.json", # 7
         "TrashTasteStreamsWordCount.json", # 8
+        "TrashTasteWordCountFiltered.json", # 9
+        "TrashTasteStreamsWordCountFiltered.json" # 10
 ]
 
 numberOfWords = 50
+season = os.getenv("SEASON")
 
-for fileNumber in range(9):
+
+for fileNumber in range(11):
+    if fileNumber not in {7,8,9,10}: 
+        #This year I'm only doing four graphs and I'm too lazy to change my code a lot
+        continue
     # Choosing file
     # fileNumber = 0
     # filename = "./Jsons/"+files[fileNumber]
@@ -29,31 +41,42 @@ for fileNumber in range(9):
     # Setting labels
     suptitle = f'Top {numberOfWords} Words Spoken By The Boys '
 
-    if fileNumber % 3 == 0:
-        suptitle += "(Trash Taste and Streams)"
-    elif fileNumber % 3 == 1:
+    if fileNumber in {7,9}:
         suptitle += "(Trash Taste)"
-    elif fileNumber % 3 == 2:
-        suptitle += "(Streams)"
-
-    title = "Filtered by "
-
-    if fileNumber < 3:
-        title += "Frequency"
-    elif fileNumber < 6:
-        title += "Stopwords"
     else:
+        suptitle += "(After Dark)"
+    
+    # if fileNumber % 3 == 0:
+    #     suptitle += "(Trash Taste and Streams)"
+    # elif fileNumber % 3 == 1:
+    #     suptitle += "(Trash Taste)"
+    # elif fileNumber % 3 == 2:
+    #     suptitle += "(Streams)"
+
+    title = ""
+    
+    if fileNumber in {7,8}:
         title = "Unfiltered"
+    else:
+        title = "Filtered"
+
+    # if fileNumber < 3:
+    #     title += "Frequency"
+    # elif fileNumber < 6:
+    #     title += "Stopwords"
+    # else:
+    #     title = "Unfiltered"
 
     # Load json
-    with open("./Jsons/"+filename, 'r') as f:
+    with open(f"./Jsons/Season {season}/"+filename, 'r') as f:
         data = json.load(f) 
 
     # Sort the data by word count
     # I think it's already sorted but this is just to make sure
     sortedData = sorted(data.items(), key=lambda item: item[1], reverse=True)[:numberOfWords]
+    # print(sortedData)
 
-
+    # quit()
     # Creates separated (but still sorted) lists for the words and counts
     # Also capitalizes all the words
     words = [key.capitalize() for (key,value) in sortedData]
@@ -71,5 +94,5 @@ for fileNumber in range(9):
     plt.ylabel("Number of times said")
     plt.suptitle(suptitle,fontsize=14)
     plt.title(title,fontsize=12)
-    fig.savefig("./Graphs/"+filename[:-4]+"png")
+    fig.savefig(f"./Graphs/Season {season}/"+filename[:-4]+"png")
 
